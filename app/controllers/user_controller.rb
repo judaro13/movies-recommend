@@ -9,7 +9,7 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    path = 'http://200.118.227.97:4000/'
+    path = 'http://maps.sibcolombia.net/'
     @ratings = JSON.parse(Net::HTTP.get(URI.parse(path+"ratings/user/#{@user.id}")))['hits']['hits']
     @tags = JSON.parse(Net::HTTP.get(URI.parse(path+"tag/user/#{@user.id}")))['hits']['hits']
 
