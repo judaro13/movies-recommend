@@ -1,0 +1,16 @@
+-items[0..@limit-1].each do |b|
+  -if b.second.kind_of?(Hash)
+    .well
+      %p
+        %strong
+          = b.second['name']
+      %p
+        =b.first
+  -else
+    .well
+      %p
+        %strong
+          =link_to b.first.name, movie_path(b.first)
+      %p
+        =b.second
+        

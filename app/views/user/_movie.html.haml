@@ -1,0 +1,20 @@
+-c=0
+-items.each do |k,v|
+  -break if c > @limit-1
+  -c+=1
+  .well
+    %p
+      %strong
+        -unless v[:name]
+          -m = Movie.find(k.to_s)
+          =link_to m.name, movie_path(k)
+        -else
+          =link_to v[:name], movie_path(k)
+    %p
+      = 'Rating:' + v[:value].to_s
+    -if reason = v[:reazon]
+      -reason.each do |k,v|
+        %strong
+          =k
+        %p
+          =v.join(', ').html_safe

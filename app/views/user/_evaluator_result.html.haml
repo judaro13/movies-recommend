@@ -1,0 +1,17 @@
+%h5 Evaluator Results 
+%p
+  RSME
+  -r = get_rsme_recomender_result(locals[:rsme])
+  %br  1
+  ="Score: #{number_with_precision(r['score'], :precision => 2)}"  
+  %br  
+  ="Standar Deviation: #{number_with_precision(r['stdDeviation'], :precision => 2)}"
+%p
+  IR
+  -r = get_ir_recommender_result(locals[:ir])
+  %br  
+  ="Precision: #{number_with_precision(r['precision'], :precision => 2)}"  
+  %br  
+  ="Recall: #{number_with_precision(r['recall'], :precision => 2)}"
+  %br  
+  ="F1: #{number_with_precision(r['f1'], :precision => 2)}"

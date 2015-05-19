@@ -1,0 +1,24 @@
+
+#featured.col-sm-12
+  .page-header.text-muted
+    Users
+  -@users.each do |u|
+
+    .row
+      .col-sm-10
+        %h3 
+          ='User ID' + u.id
+        %h4
+          %span.label.label-default 
+        %h4
+          %small.text-muted
+            = "#{u.total_ratings} ratings • "
+            =link_to 'View', user_path(u), class: 'text-muted'
+      .col-sm-2
+        =link_to user_path(u), class: 'pull-right' do
+          %img.img-circle{:src => ramdom_user_image }
+    .row.divider
+      .col-sm-12
+        %hr/
+
+  = will_paginate @users

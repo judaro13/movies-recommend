@@ -25,6 +25,8 @@ gem "sparql-client"
 gem 'mongoid', '~> 4', github: 'mongoid/mongoid'
 gem 'bson_ext'
 gem 'pry'
+gem 'haml'
+gem 'will_paginate_mongoid'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

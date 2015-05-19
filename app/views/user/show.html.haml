@@ -1,0 +1,111 @@
+
+#featured.col-sm-12
+  .row
+    .col-sm-10
+      %h3 
+        %img.img-circle{:src => ramdom_user_image }
+        ='User ID' + @user.id
+  
+
+  .page-header.text-muted
+    Recommendations
+    = form_tag user_path(@user), method: :get, class: 'form-inline' do
+      .form-group
+        =select_tag :neigborhood, options_for_select([[5, 5],[10, 10]], select_neigborhood), class: 'form-control'
+      = submit_tag("Go!", class: 'btn btn-primary')
+  .row
+    .col-sm-4.text-center
+      %h4 Collaborative Filtering
+      .well.text-left
+        %strong Measures
+        %p
+          -if @limit == 5
+            Precision: 0,03756
+            %br
+            Recall: 0,0487
+            %br
+            F-Measure: 0,0424
+          -else
+            Precision: 0,0381
+            %br
+            Recall: 0,0481
+            %br
+            F-Measure: 0,0425
+
+
+      =render 'movie_cf', items: get_cf_items(@collaborative)
+    .col-sm-4.text-center
+      %h4 Content Based + Ontology
+      .well.text-left
+        %strong Measures
+        %p
+          -if @limit == 5
+            Precision: 0,0351
+            %br
+            Recall: 0,0527
+            %br
+            F-Measure: 0,0421
+          -else
+            Precision: 0,0528
+            %br
+            Recall: 0,0481
+            %br
+            F-Measure: 0,0426
+      =render 'movie', items: get_items(@onto)
+    .col-sm-4.text-center
+      %h4 Hibrid
+      .well.text-left
+        %strong Measures
+        %p
+          -if @limit == 5
+            Precision: 0,0422
+            %br
+            Recall: 0,0478
+            %br
+            F-Measure: 0,0448
+          -else
+            Precision: 0,0427
+            %br
+            Recall: 0,0472
+            %br
+            F-Measure: 0,0449
+      =render 'movie', items: get_items(@hibrid)
+
+
+  .page-header.text-muted
+    Raited Movies
+  .row
+    -@ratings.each do |r|
+      -rat = r['_source']
+      -id =rat['item_id'].to_s
+      -m = Movie.find(id)
+      .col-sm-4.text-center
+        %h4 
+          =m.name
+        %h4
+          %small.text-muted
+            = "#{rat['value']} •"
+            =link_to 'View', movie_path(m), class: 'text-muted'
+    .divider
+      .col-sm-12
+        %hr/
+
+  .page-header.text-muted
+    Tagged Movies
+
+  -parse_tags.each do |k,v|
+    -m = Movie.find(k.to_s)
+    .row
+      .col-sm-10
+        %h4 
+          =m.name
+        %h4
+          -v.each do |t|
+            %span.label.label-default{style: 'margin: 2px;'}
+              =t
+        %h4
+          %small.text-muted
+            =link_to 'View', movie_path(m), class: 'text-muted'
+    .divider
+      .col-sm-12
+        %hr/

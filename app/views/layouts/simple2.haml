@@ -1,0 +1,32 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "content-type"}/
+    %meta{:charset => "utf-8"}/
+    %title Recommendation Systems
+    %meta{:content => "Bootply", :name => "generator"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1", :name => "viewport"}/
+    = stylesheet_link_tag   'bootstrap.min', 'styles'
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"
+    = javascript_include_tag 'bootstrap.min'
+  %body
+    .wrapper
+      .boxm
+        .row
+          / sidebar
+          #sidebar.column.col-sm-3
+            %a.logo{:href => "/"} RS
+            %ul.nav
+              %li.active
+                %a{:href => "/"} Users
+              %li
+                %a{:href => "/stats/"} Stats
+            %ul#sidebar-footer.nav.hidden-xs
+              %li
+                Sistemas de Recomendaciones - Uniandes
+                {dr.juliana10, go.laura10}@uniandes.edu.co
+          #main.column.col-sm-9
+            .padding
+              .full.col-sm-9
+                =yield
+                
