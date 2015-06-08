@@ -20,6 +20,7 @@ namespace :movies do
   task populate: :environment do
     puts 'begin'
 
+    # avoiding index error with to many records over the database
     max = (Movie.where(fix_me: true).count.to_f/100).ceil
     (0..max).each do |n|
       Movie.where(fix_me: true).limit(100).offset(100*n).each  do |movie|

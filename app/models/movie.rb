@@ -16,8 +16,8 @@ class Movie
   field :fix_me, type: Boolean, default: false
 
   has_many :ratings
-# m = Movie.where(fix_me: true).first
 
+  # removing non valid characters
   def fix_name
     fname = self.name
     fname = fname.gsub!(/[!@%:"]/,'')
@@ -28,6 +28,7 @@ class Movie
     self.save
   end
 
+  # enriching database attributes with dbpedia queries
   def enrich
     filter_q1 = "FILTER (?s = <http://dbpedia.org/resource/#{film_name}>)"
     filter_q2 = "FILTER (?s = <http://dbpedia.org/resource/#{film_name}_(film)>)" 
@@ -80,6 +81,7 @@ class Movie
     self.save
   end
 
+  #Sparql query to dbpedia
   def query(filter)
     'SELECT DISTINCT ?s ?director ?editing ?producer ?starring ?writer ?music ?narrator ?cinema
               WHERE {
